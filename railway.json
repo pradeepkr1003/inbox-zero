@@ -2,10 +2,10 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "buildCommand": "pnpm install --frozen-lockfile --prefer-offline --prod=false --config.node-linker=hoisted --force && cd apps/web && NODE_OPTIONS=--max_old_space_size=16384 node ../../node_modules/next/dist/bin/next build --webpack"
+    "buildCommand": "pnpm install --frozen-lockfile --prefer-offline --prod=false --ignore-scripts && cd apps/web && NODE_OPTIONS=--max_old_space_size=16384 pnpm exec next build --webpack"
   },
   "deploy": {
-    "preDeployCommand": "cd apps/web && node scripts/recover-booking-availability-migration.cjs && ../../node_modules/.bin/prisma migrate deploy",
-    "startCommand": "cd apps/web && node ../../node_modules/next/dist/bin/next start -p ${PORT:-3000}"
+    "preDeployCommand": "cd apps/web && node scripts/recover-booking-availability-migration.cjs && pnpm exec prisma migrate deploy",
+    "startCommand": "cd apps/web && pnpm exec next start -p ${PORT:-3000}"
   }
 }
