@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build --filter=./apps/web",
     "dev": "turbo dev --filter=./apps/web",
+    "start": "pnpm --filter inbox-zero-ai start",
     "worker": "pnpm --filter @inboxzero/worker start",
     "test": "turbo run test --filter=./apps/web -- --run",
     "test-integration": "pnpm --filter inbox-zero-ai test-integration",
