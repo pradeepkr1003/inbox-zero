@@ -2,10 +2,10 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "buildCommand": "cd apps/web && DOCKER_BUILD=true NODE_OPTIONS=--max_old_space_size=16384 pnpm exec next build --webpack"
+    "buildCommand": "cd apps/web && NODE_OPTIONS=--max_old_space_size=16384 node ../../node_modules/next/dist/bin/next build --webpack"
   },
   "deploy": {
-    "preDeployCommand": "pnpm --filter inbox-zero-ai exec node scripts/recover-booking-availability-migration.cjs && pnpm --filter inbox-zero-ai exec prisma migrate deploy",
-    "startCommand": "pnpm --filter inbox-zero-ai start:standalone"
+    "preDeployCommand": "cd apps/web && node scripts/recover-booking-availability-migration.cjs && ../../node_modules/.bin/prisma migrate deploy",
+    "startCommand": "cd apps/web && node ../../node_modules/next/dist/bin/next start -p ${PORT:-3000}"
   }
 }
