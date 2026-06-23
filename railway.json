@@ -2,7 +2,7 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "buildCommand": "DOCKER_BUILD=true pnpm --filter inbox-zero-ai build:ci"
+    "buildCommand": "cd apps/web && DOCKER_BUILD=true NODE_OPTIONS=--max_old_space_size=16384 pnpm exec next build --webpack"
   },
   "deploy": {
     "preDeployCommand": "pnpm --filter inbox-zero-ai exec node scripts/recover-booking-availability-migration.cjs && pnpm --filter inbox-zero-ai exec prisma migrate deploy",
